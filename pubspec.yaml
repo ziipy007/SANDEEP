@@ -2,19 +2,23 @@ name: zippy_user
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment: 
+environment:
   sdk: '>=3.3.0 <4.0.0'
 
-dependencies: 
+dependencies:
+  animated_splash_screen: ^1.3.0
   cupertino_icons: ^1.0.6
-  get_cli: ^1.8.4
-  get: 4.6.6
-  flutter: 
+  flutter:
     sdk: flutter
+  get: 4.6.6
+  get_cli: ^1.8.1
+  google_fonts: ^4.0.4
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^3.0.0
 
-flutter: 
+flutter:
   uses-material-design: true
 
+  assets:
+    - assets/
