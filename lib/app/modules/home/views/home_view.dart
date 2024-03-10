@@ -2,13 +2,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:zippy_user/app/mixins/utility_mixins.dart';
 import 'package:zippy_user/app/modules/home/category/category.dart';
-import 'package:zippy_user/app/modules/home/transports/transports.dart';
+import 'package:zippy_user/app/modules/home/category/view/category_view.dart';
+import 'package:zippy_user/app/modules/home/coupons/views/coupons_code.dart';
+import 'package:zippy_user/app/modules/home/transports/model/transports.dart';
+import 'package:zippy_user/app/modules/user/views/user_details_view.dart';
 
 import '../../../themes/app_colors.dart';
 import '../controllers/home_controller.dart';
+import '../transports/views/transports_details.dart';
 
-class HomeView extends GetView<HomeController> {
+class HomeView extends GetView<HomeController> with UtilityMixin {
   HomeView({super.key});
 
   List<CategoryList> categoryLists = getCategoryList();
@@ -58,6 +63,33 @@ class HomeView extends GetView<HomeController> {
         'oneParcelFees': '₹150 for one',
         'rating': '4.0'
       },
+      {
+        'transportImage': 'assets/transports_4.png',
+        'transportName': 'Akshar Transport',
+        'parcelType': 'Glass Parcel',
+        'transportMessage':
+            'Ziipy funds environmental projects to offset offset delivery carbon footprint',
+        'oneParcelFees': '₹250 for one',
+        'rating': '4.4'
+      },
+       {
+        'transportImage': 'assets/transports_5.png',
+        'transportName': 'Delux Expresss Transport',
+        'parcelType': 'Wood Parcel',
+        'transportMessage':
+            'Ziipy funds environmental projects to offset offset delivery carbon footprint',
+        'oneParcelFees': '₹450 for one',
+        'rating': '4.5'
+      },
+       {
+        'transportImage': 'assets/transports_6.jpg',
+        'transportName': 'Tirupati Transports',
+        'parcelType': 'Plastic Parcel',
+        'transportMessage':
+            'Ziipy funds environmental projects to offset offset delivery carbon footprint',
+        'oneParcelFees': '₹450 for one',
+        'rating': '3.5'
+      },
     ];
     return data.map<TransportsList>(TransportsList.fromJson).toList();
   }
@@ -68,29 +100,35 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.whiteColor,
-        toolbarHeight: 62,
-        leadingWidth: 0,
-        title: Container(
-          margin: const EdgeInsets.only(top: 10),
-          height: 40,
-          decoration: BoxDecoration(
-              color: const Color(0xffD9D9D9).withOpacity(0.7),
-              borderRadius: BorderRadius.circular(50)),
-          child:  TextField(
-            decoration: InputDecoration(
-                contentPadding: const EdgeInsets.only(top: 3.2),
-                border: InputBorder.none,
-                 hintText: 'Search Location',
-                  hintStyle: GoogleFonts.abhayaLibre(
-                      color: AppColors.blackColor.withOpacity(0.5),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18),
-                prefixIcon: const Icon(Icons.location_on)),
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
+        surfaceTintColor: AppColors.whiteColor,
+        toolbarHeight: 10,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                          margin: const EdgeInsets.only(top: 10,left: 12),
+                          height: 40,
+                          width: width * 0.77,
+                          decoration: BoxDecoration(
+                  color: const Color(0xffD9D9D9).withOpacity(0.7),
+                  borderRadius: BorderRadius.circular(50)),
+                          child: TextField(
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(top: 3.2),
+                    border: InputBorder.none,
+                    hintText: 'Search Location',
+                    hintStyle: GoogleFonts.abhayaLibre(
+                        color: AppColors.blackColor.withOpacity(0.5),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18),
+                    prefixIcon: const Icon(Icons.location_on)),
+                          ),
+                        ),
+                const Spacer(),
+                     Padding(
             padding: const EdgeInsets.only(right: 8, top: 10),
             child: Image.asset(
               'assets/translation.png',
@@ -98,19 +136,21 @@ class HomeView extends GetView<HomeController> {
               width: 30,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 10, top: 10),
-            child: Image.asset(
-              'assets/user.png',
-              height: 27,
-              width: 27,
+          GestureDetector(
+            onTap: (){
+              navigationPush(context, UserDetailsView());
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10, top: 10),
+              child: Image.asset(
+                'assets/user.png',
+                height: 27,
+                width: 27,
+              ),
             ),
           ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+              ],
+            ),
             Container(
               margin: const EdgeInsets.all(12),
               height: 40,
@@ -131,9 +171,14 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Image.asset('assets/poster.png'),
+            GestureDetector(
+              onTap: () {
+                navigationPush(context, const CouponView());
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Image.asset('assets/poster.png'),
+              ),
             ),
             Text(
               'WHAT’S ON YOUR MIND?',
@@ -208,22 +253,27 @@ class HomeView extends GetView<HomeController> {
             itemCount: totalCategory.length,
             itemBuilder: (context, index) {
               final categories = totalCategory[index];
-              return Column(
-                children: [
-                  SizedBox(
-                    height: 75,
-                    width: 75,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage(categories.categoryImage),
+              return GestureDetector(
+                onTap: (){
+                  navigationPush(context, CategoryView());
+                },
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 75,
+                      width: 75,
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(categories.categoryImage),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(categories.categoryName,
-                      style: GoogleFonts.inter(
-                          color: AppColors.blackColor,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 13)),
-                ],
+                    const SizedBox(height: 5),
+                    Text(categories.categoryName,
+                        style: GoogleFonts.inter(
+                            color: AppColors.blackColor,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 13)),
+                  ],
+                ),
               );
             },
           ));
@@ -241,139 +291,144 @@ class HomeView extends GetView<HomeController> {
           itemCount: totalTransports.length,
           itemBuilder: (context, index) {
             final transports = totalTransports[index];
-            return Container(
-              height: 320,
-              width: double.maxFinite,
-              margin: const EdgeInsets.all(10),
-              child: Stack(
-                children: [
-                  Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        image: DecorationImage(
-                          image: AssetImage(transports.transportImage),
-                          fit: BoxFit.fitWidth,
-                        )),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: 120,
-                      width: double.maxFinite,
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      margin: const EdgeInsets.only(bottom: 12),
+            return GestureDetector(
+              onTap: (){
+                navigationPush(context, TransportsDetailsView());
+              },
+              child: Container(
+                height: 320,
+                width: double.maxFinite,
+                margin: const EdgeInsets.all(10),
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 200,
                       decoration: BoxDecoration(
-                          color: AppColors.whiteColor,
-                          borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(-1, 1),
-                              blurRadius: 3,
-                              color: AppColors.blackColor.withOpacity(0.3),
-                            )
-                          ]),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    transports.transportName,
-                                    style: GoogleFonts.adamina(
-                                        color: AppColors.blackColor,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 16.5),
-                                  ),
-                                  Text(
-                                    transports.parcelType,
-                                    style: GoogleFonts.adamina(
-                                        color: AppColors.blackColor,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  )
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    height: 17,
-                                    width: 45,
-                                    margin: const EdgeInsets.only(top: 10),
-                                    decoration: BoxDecoration(
-                                        color: const Color(0xFF2B7D0F),
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          transports.rating,
-                                          style: GoogleFonts.publicSans(
-                                              color: AppColors.whiteColor,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                        const SizedBox(width: 3),
-                                        const Icon(Icons.star,
-                                            color: AppColors.whiteColor,
-                                            size: 12)
-                                      ],
+                          borderRadius: BorderRadius.circular(12),
+                          image: DecorationImage(
+                            image: AssetImage(transports.transportImage),
+                            fit: BoxFit.fitWidth,
+                          )),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 120,
+                        width: double.maxFinite,
+                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        margin: const EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                            color: AppColors.whiteColor,
+                            borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10)),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: const Offset(-1, 1),
+                                blurRadius: 3,
+                                color: AppColors.blackColor.withOpacity(0.3),
+                              )
+                            ]),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      transports.transportName,
+                                      style: GoogleFonts.adamina(
+                                          color: AppColors.blackColor,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 16.5),
                                     ),
-                                  ),
-                                  Text(
-                                    transports.oneParcelFees,
+                                    Text(
+                                      transports.parcelType,
+                                      style: GoogleFonts.adamina(
+                                          color: AppColors.blackColor,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12),
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      height: 17,
+                                      width: 45,
+                                      margin: const EdgeInsets.only(top: 10),
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFF2B7D0F),
+                                          borderRadius: BorderRadius.circular(5)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            transports.rating,
+                                            style: GoogleFonts.publicSans(
+                                                color: AppColors.whiteColor,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          const SizedBox(width: 3),
+                                          const Icon(Icons.star,
+                                              color: AppColors.whiteColor,
+                                              size: 12)
+                                        ],
+                                      ),
+                                    ),
+                                    Text(
+                                      transports.oneParcelFees,
+                                      style: GoogleFonts.adamina(
+                                          color: AppColors.blackColor,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Image.asset('assets/environment.png',
+                                    height: 25, width: 25),
+                                const SizedBox(width: 7),
+                                Flexible(
+                                  child: Text(
+                                    transports.transportMessage,
+                                    overflow: TextOverflow.clip,
+                                    maxLines: 2,
                                     style: GoogleFonts.adamina(
                                         color: AppColors.blackColor,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image.asset('assets/environment.png',
-                                  height: 25, width: 25),
-                              const SizedBox(width: 7),
-                              Flexible(
-                                child: Text(
-                                  transports.transportMessage,
-                                  overflow: TextOverflow.clip,
-                                  maxLines: 2,
-                                  style: GoogleFonts.adamina(
-                                      color: AppColors.blackColor,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 11.5),
+                                        fontSize: 11.5),
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 12),
-                              Row(
-                                children: [
-                                  Image.asset('assets/arrow.png',
-                                      height: 20, width: 20),
-                                  const SizedBox(width: 7),
-                                  Image.asset('assets/max_safety.png',
-                                      height: 36, width: 80)
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
+                                const SizedBox(width: 12),
+                                Row(
+                                  children: [
+                                    Image.asset('assets/arrow.png',
+                                        height: 20, width: 20),
+                                    const SizedBox(width: 7),
+                                    Image.asset('assets/max_safety.png',
+                                        height: 36, width: 80)
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },
