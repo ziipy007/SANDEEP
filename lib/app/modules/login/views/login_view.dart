@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zippy_user/app/mixins/utility_mixins.dart';
 import 'package:zippy_user/app/modules/login/local_widgets/login_button.dart';
-import 'package:zippy_user/app/modules/login/otp/view/otp_view.dart';
 import 'package:zippy_user/app/utils/validators/app_validations.dart';
 
 import '../../../themes/app_colors.dart';
