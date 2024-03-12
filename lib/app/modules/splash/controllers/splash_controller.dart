@@ -14,9 +14,9 @@ class SplashController extends GetxController {
     String? token= HiveConstants.getAuthToken();
     await Future.delayed(const Duration(seconds: 3));
     if(token==null||token.isEmpty){
-      Get.offAllNamed(Routes.HOME);
-    }else{
       Get.offAllNamed(Routes.LOGIN);
+    }else{
+      Get.offAllNamed(Routes.HOME);
     }
   }
 

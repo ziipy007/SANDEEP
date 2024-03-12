@@ -12,6 +12,7 @@ class DioApiBaseHelper {
   static String BASE_URL = MAIN_URL + SUB_URL;
   static String sendOtp = 'auth/sendOtp';
   static String verifyOtp = 'auth/verifyLoginOtp';
+  static String googleLogin = 'auth/emailLogin';
 
   static get(String url) async {
     try {

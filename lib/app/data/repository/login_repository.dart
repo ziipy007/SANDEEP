@@ -39,6 +39,24 @@ class AuthRepository {
     }
   }
 
+  Future<SendLoginOtpResponse?> loginWithGoogle(
+      {required String email,
+        required String uid}) async {
+    var formData = {
+      "email": email,
+      "fid": uid
+    };
+
+    try {
+      var res =
+      await DioApiBaseHelper.postDio(DioApiBaseHelper.googleLogin, formData);
+      return SendLoginOtpResponse.fromJson(res);
+    } catch (error, stacktrace) {
+      return null;
+    }
+  }
+
+
 // Future<LoginResponse?> login(
 //     {required String email, required String password}) async {
 //   var formData = {

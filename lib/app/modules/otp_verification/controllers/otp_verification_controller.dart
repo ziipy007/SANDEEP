@@ -56,7 +56,7 @@ class OtpVerificationController extends GetxController {
       ZippySnackbar.showErrorSnackbar("Verified");
       Get.toNamed(Routes.OTP_VERIFICATION,
           arguments: response.data?.verificationId);
-    }
+    }else
     if (response != null && response.status == 2) {
       ZippySnackbar.showErrorSnackbar("Verified");
       Get.toNamed(Routes.OTP_VERIFICATION,

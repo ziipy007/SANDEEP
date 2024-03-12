@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "150341222003",
+    "project_id": "zippy-user",
+    "storage_bucket": "zippy-user.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150341222003:android:ff365ddaca64a81ce73406",
+        "android_client_info": {
+          "package_name": "com.ziipy.user.zippy_user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDApV9V-1PQ2sE4XDcD3TDAemKuYcHx1bI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

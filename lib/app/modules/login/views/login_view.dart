@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zippy_user/app/mixins/utility_mixins.dart';
@@ -7,6 +8,7 @@ import 'package:zippy_user/app/utils/validators/app_validations.dart';
 
 import '../../../themes/app_colors.dart';
 import '../controllers/login_controller.dart';
+import '../local_widgets/login_top_view.dart';
 
 class LoginView extends GetView<LoginController> with UtilityMixin {
   LoginView({super.key});
@@ -44,47 +46,13 @@ class LoginView extends GetView<LoginController> with UtilityMixin {
           key: formState,
           child: Column(
             children: [
-              Text(
-                'ziipy',
-                style: GoogleFonts.k2d(
-                    color: AppColors.primaryColor,
-                    fontSize: 80,
-                    fontWeight: FontWeight.w800),
-              ),
-              SizedBox(
-                  height: 320,
-                  width: 320,
-                  child: Image.asset('assets/login_logo.png')),
+              const LoginTopView(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(width: 40),
                   Container(
-                    width: 110,
-                    margin: const EdgeInsets.symmetric(horizontal: 12),
-                    height: 1,
-                    color: AppColors.blackColor,
-                  ),
-                  Text(
-                    'Log in or Sign up',
-                    style: GoogleFonts.inter(
-                        color: AppColors.blackColor.withOpacity(0.62),
-                        fontSize: 14.3,
-                        height: 2,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  Container(
-                    width: 110,
-                    margin: const EdgeInsets.symmetric(horizontal: 12),
-                    height: 1,
-                    color: AppColors.blackColor,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 35,
+                    height: 40,
                     width: 45,
                     padding: const EdgeInsets.all(5),
                     margin: const EdgeInsets.symmetric(vertical: 20),
@@ -96,57 +64,57 @@ class LoginView extends GetView<LoginController> with UtilityMixin {
                     child: Image.asset('assets/flag.png'),
                   ),
                   const SizedBox(width: 15),
-                  Container(
-                    height: 35,
-                    width: 250,
-                    padding: const EdgeInsets.all(7),
-                    margin: const EdgeInsets.symmetric(vertical: 20),
+                  Expanded(
+                      child: Container(
+                    height: 40,
+                    alignment: Alignment.center,
+                    // padding: const EdgeInsets.all(5),
+                    // margin: const EdgeInsets.symmetric(vertical: 20),
                     decoration: BoxDecoration(
                       color: AppColors.blackColor.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(
                           color: AppColors.blackColor.withOpacity(0.18)),
                     ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          '+91',
+                    child: TextFormField(
+                      maxLength: 10,
+                      autofocus: false,
+                      controller: mobileController,
+                      keyboardType: TextInputType.number,
+                      validator: AppValidator.validateMobile,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        border: InputBorder.none,
+                        counterText: '',
+                        hintText: 'Enter Your Phone number',
+                        hintStyle: GoogleFonts.inter(
+                            color: AppColors.blackColor.withOpacity(0.4),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
+                        isDense: true,
+                        contentPadding: EdgeInsets.zero,
+                        prefixIconConstraints: BoxConstraints(),
+                        prefixIcon: Text(
+                          '+91 ',
                           style: GoogleFonts.inter(
                               color: AppColors.blackColor,
-                              fontSize: 15,
+                              fontSize: 14,
                               fontWeight: FontWeight.w400),
                         ),
-                        const SizedBox(width: 5),
-                        Expanded(
-                          child: TextFormField(
-                            maxLength: 10,
-                            controller: mobileController,
-                            keyboardType: TextInputType.number,
-                            validator: AppValidator.validateMobile,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              counterText: '',
-                              hintText: 'Enter Your Phone number',
-                              hintStyle: GoogleFonts.inter(
-                                  color: AppColors.blackColor.withOpacity(0.4),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400),
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 2.8),
-                            ),
-                            style: GoogleFonts.inter(
-                                color: AppColors.blackColor,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      ),
+                      style: GoogleFonts.inter(
+                          color: AppColors.blackColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ).paddingSymmetric(horizontal: 5),
+                  )),
+                  const SizedBox(width: 40),
                 ],
               ),
+              const SizedBox(width: 10),
               Obx(() => LoginButtonView(
                   isLoading: controller.loading.value,
                   onClick: () {
@@ -157,12 +125,12 @@ class LoginView extends GetView<LoginController> with UtilityMixin {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 160,
+                  Expanded(
+                      child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 12),
                     height: 1,
                     color: AppColors.blackColor.withOpacity(0.2),
-                  ),
+                  )),
                   Text(
                     'OR',
                     style: GoogleFonts.inter(
@@ -171,16 +139,19 @@ class LoginView extends GetView<LoginController> with UtilityMixin {
                         height: 3,
                         fontWeight: FontWeight.w400),
                   ),
-                  Container(
-                    width: 160,
+                  Expanded(
+                      child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 12),
                     height: 1,
                     color: AppColors.blackColor.withOpacity(0.2),
-                  ),
+                  )),
                 ],
               ),
               // const SizedBox(height: 10),
-              Image.asset('assets/google.png', height: 30, width: 30),
+              IconButton(
+                  onPressed: controller.signInWithGoogle,
+                  icon:
+                      Image.asset('assets/google.png', height: 30, width: 30)),
               const Spacer(),
               Text(
                 'By continuing, you agree to',
