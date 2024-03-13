@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zippy_user/app/mixins/utility_mixins.dart';
-import 'package:zippy_user/app/modules/login/otp/view/otp_view.dart';
+import 'package:zippy_user/app/modules/otp/view/otp_view.dart';
 
 import '../../../themes/app_colors.dart';
 import '../controllers/login_controller.dart';
@@ -17,6 +18,7 @@ class LoginView extends GetView<LoginController> with UtilityMixin {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: AppColors.whiteColor,
+        toolbarHeight: 45,
         actions: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -42,35 +44,38 @@ class LoginView extends GetView<LoginController> with UtilityMixin {
               'ziipy',
               style: GoogleFonts.k2d(
                   color: AppColors.primaryColor,
-                  fontSize: 80,
+                  fontSize: 70,
                   fontWeight: FontWeight.w800),
             ),
             SizedBox(
-                height: 320,
-                width: 320,
+                height: 280,
+                width: 280,
                 child: Image.asset('assets/login_logo.png')),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 110,
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  height: 1,
-                  color: AppColors.blackColor,
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
+                    height: 1,
+                    color: AppColors.blackColor,
+                  ),
                 ),
                 Text(
                   'Log in or Sign up',
                   style: GoogleFonts.inter(
                       color: AppColors.blackColor.withOpacity(0.62),
                       fontSize: 14.3,
-                      height: 2,
                       fontWeight: FontWeight.w400),
                 ),
-                Container(
-                  width: 110,
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  height: 1,
-                  color: AppColors.blackColor,
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
+                    height: 1,
+                    color: AppColors.blackColor,
+                  ),
                 ),
               ],
             ),
@@ -140,12 +145,12 @@ class LoginView extends GetView<LoginController> with UtilityMixin {
               ],
             ),
             GestureDetector(
-              onTap : (){
+              onTap: () {
                 navigationPush(context, const OTPView());
               },
               child: Container(
                 height: 40,
-                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 50),
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 40),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF20C27),
                   borderRadius: BorderRadius.circular(10),

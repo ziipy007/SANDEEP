@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zippy_user/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
-import 'package:zippy_user/app/modules/user/orders/views/orders_view.dart';
+import 'package:zippy_user/app/modules/orders/views/orders_view.dart';
 
 import '../../../mixins/utility_mixins.dart';
 import '../../../themes/app_colors.dart';
@@ -377,6 +377,48 @@ class UserDetailsView extends GetView<HomeController> with UtilityMixin {
                       ),
                     )),
                 const SizedBox(height: 12),
+                 SizedBox(
+                    height: 50,
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Mobile No.',
+                        labelStyle: GoogleFonts.inter(
+                            color: const Color(0xFF9A9A9A),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15),
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFFD9D9D9)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff367AFF)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                      ),
+                    )),
+                      const SizedBox(height: 12),
+                     SizedBox(
+                    height: 50,
+                    child: TextField(
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        labelText: 'Email Id',
+                        labelStyle: GoogleFonts.inter(
+                            color: const Color(0xFF9A9A9A),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15),
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFFD9D9D9)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff367AFF)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                      ),
+                    )),
+                      const SizedBox(height: 12),
                 SizedBox(
                     height: 50,
                     child: TextField(
@@ -398,27 +440,8 @@ class UserDetailsView extends GetView<HomeController> with UtilityMixin {
                       ),
                     )),
                 const SizedBox(height: 12),
-                SizedBox(
-                    height: 50,
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: 'Mobile No,',
-                        labelStyle: GoogleFonts.inter(
-                            color: const Color(0xFF9A9A9A),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFFD9D9D9)),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xff367AFF)),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                      ),
-                    )),
-                const SizedBox(height: 12),
+               
+              
                 SizedBox(
                     height: 50,
                     child: TextField(
@@ -465,26 +488,7 @@ class UserDetailsView extends GetView<HomeController> with UtilityMixin {
                       ),
                     )),
                 const SizedBox(height: 12),
-                SizedBox(
-                    height: 50,
-                    child: TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: 'Email Id',
-                        labelStyle: GoogleFonts.inter(
-                            color: const Color(0xFF9A9A9A),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFFD9D9D9)),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xff367AFF)),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                      ),
-                    )),
+               
                 const SizedBox(height: 12),
                 SizedBox(
                     height: 50,

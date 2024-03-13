@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:zippy_user/app/modules/login/otp/controllers/otp_controllers.dart';
+import 'package:zippy_user/app/modules/otp/controllers/otp_controllers.dart';
 import 'package:get/get.dart';
 
-import '../../../../themes/app_colors.dart';
+import '../../../themes/app_colors.dart';
 
 class OTPView extends GetView<OTPController> {
   const OTPView({super.key});
@@ -76,6 +76,8 @@ class OTPView extends GetView<OTPController> {
                         fontWeight: FontWeight.w500,
                         fontSize: 22),
                     textInputAction: TextInputAction.next,
+                    cursorWidth: 1.5,
+                    cursorColor: AppColors.primaryColor,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       isDense: true,
@@ -104,12 +106,15 @@ class OTPView extends GetView<OTPController> {
                         fontWeight: FontWeight.w500,
                         fontSize: 22),
                     textInputAction: TextInputAction.next,
+                     cursorWidth: 1.5,
+                    cursorColor: AppColors.primaryColor,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       isDense: true,
                       counterText: '',
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                      
                     ),
                   ),
                 ),
@@ -132,38 +137,12 @@ class OTPView extends GetView<OTPController> {
                         fontWeight: FontWeight.w500,
                         fontSize: 22),
                     textInputAction: TextInputAction.next,
+                     cursorWidth: 1.5,
+                    cursorColor: AppColors.primaryColor,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       isDense: true,
                       counterText: '',
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 40,
-                  width: 40,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.only(left: 12),
-                  margin: const EdgeInsets.only(top: 10, right: 6),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(
-                          color: const Color(0xFFC4C4C4), width: 0.8)),
-                  child: TextField(
-                    maxLength: 1,
-                    autofocus: true,
-                    keyboardType: TextInputType.number,
-                    style: GoogleFonts.inter(
-                        color: AppColors.blackColor,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 22),
-                    textInputAction: TextInputAction.next,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      counterText: '',
-                      isDense: true,
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                     ),
@@ -188,6 +167,38 @@ class OTPView extends GetView<OTPController> {
                         fontWeight: FontWeight.w500,
                         fontSize: 22),
                     textInputAction: TextInputAction.next,
+                     cursorWidth: 1.5,
+                    cursorColor: AppColors.primaryColor,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      counterText: '',
+                      isDense: true,
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  width: 40,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.only(left: 12),
+                  margin: const EdgeInsets.only(top: 10, right: 6),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                          color: const Color(0xFFC4C4C4), width: 0.8)),
+                  child: TextField(
+                    maxLength: 1,
+                    autofocus: true,
+                    keyboardType: TextInputType.number,
+                    style: GoogleFonts.inter(
+                        color: AppColors.blackColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 22),
+                    textInputAction: TextInputAction.next,
+                     cursorWidth: 1.5,
+                    cursorColor: AppColors.primaryColor,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       counterText: '',
@@ -216,6 +227,8 @@ class OTPView extends GetView<OTPController> {
                         fontWeight: FontWeight.w500,
                         fontSize: 22),
                     textInputAction: TextInputAction.done,
+                     cursorWidth: 1.5,
+                    cursorColor: AppColors.primaryColor,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       counterText: '',
@@ -259,7 +272,7 @@ class OTPView extends GetView<OTPController> {
                 ),
               ],
             ),
-             const SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

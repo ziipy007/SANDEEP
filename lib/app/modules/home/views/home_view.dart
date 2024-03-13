@@ -1,17 +1,19 @@
 // ignore_for_file: must_be_immutable, non_constant_identifier_names
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zippy_user/app/mixins/utility_mixins.dart';
 import 'package:zippy_user/app/modules/home/category/category.dart';
 import 'package:zippy_user/app/modules/home/category/view/category_view.dart';
-import 'package:zippy_user/app/modules/home/coupons/views/coupons_code.dart';
-import 'package:zippy_user/app/modules/home/transports/model/transports.dart';
+import 'package:zippy_user/app/modules/coupons/views/coupons_code.dart';
+import 'package:zippy_user/app/modules/transports/model/transports.dart';
 import 'package:zippy_user/app/modules/user/views/user_details_view.dart';
 
 import '../../../themes/app_colors.dart';
 import '../controllers/home_controller.dart';
-import '../transports/views/transports_details.dart';
+import '../../transports/views/transports_details.dart';
+import '../local_widgets/bottom_sheet_view.dart';
 
 class HomeView extends GetView<HomeController> with UtilityMixin {
   HomeView({super.key});
@@ -72,7 +74,7 @@ class HomeView extends GetView<HomeController> with UtilityMixin {
         'oneParcelFees': '₹250 for one',
         'rating': '4.4'
       },
-       {
+      {
         'transportImage': 'assets/transports_5.png',
         'transportName': 'Delux Expresss Transport',
         'parcelType': 'Wood Parcel',
@@ -81,7 +83,7 @@ class HomeView extends GetView<HomeController> with UtilityMixin {
         'oneParcelFees': '₹450 for one',
         'rating': '4.5'
       },
-       {
+      {
         'transportImage': 'assets/transports_6.jpg',
         'transportName': 'Tirupati Transports',
         'parcelType': 'Plastic Parcel',
@@ -109,46 +111,54 @@ class HomeView extends GetView<HomeController> with UtilityMixin {
             Row(
               children: [
                 Container(
-                          margin: const EdgeInsets.only(top: 10,left: 12),
-                          height: 40,
-                          width: width * 0.77,
-                          decoration: BoxDecoration(
-                  color: const Color(0xffD9D9D9).withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(50)),
-                          child: TextField(
-                decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.only(top: 3.2),
-                    border: InputBorder.none,
-                    hintText: 'Search Location',
-                    hintStyle: GoogleFonts.abhayaLibre(
-                        color: AppColors.blackColor.withOpacity(0.5),
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18),
-                    prefixIcon: const Icon(Icons.location_on)),
-                          ),
-                        ),
+                  margin: const EdgeInsets.only(top: 10, left: 12),
+                  height: 40,
+                  width: width * 0.77,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(
+                          color: AppColors.blackColor.withOpacity(0.5))),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.only(top: 1.6),
+                        border: InputBorder.none,
+                        hintText: 'Search Location',
+                        alignLabelWithHint: true,
+                        floatingLabelAlignment: FloatingLabelAlignment.center,
+                        hintStyle: GoogleFonts.abhayaLibre(
+                            color: AppColors.blackColor.withOpacity(0.5),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18),
+                        prefixIcon: Icon(Icons.location_on,color: AppColors.blackColor.withOpacity(0.5),)),
+                  ),
+                ),
                 const Spacer(),
-                     Padding(
-            padding: const EdgeInsets.only(right: 8, top: 10),
-            child: Image.asset(
-              'assets/translation.png',
-              height: 30,
-              width: 30,
-            ),
-          ),
-          GestureDetector(
-            onTap: (){
-              navigationPush(context, UserDetailsView());
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10, top: 10),
-              child: Image.asset(
-                'assets/user.png',
-                height: 27,
-                width: 27,
-              ),
-            ),
-          ),
+                GestureDetector(
+                  onTap: () {
+                    navigationPush(context, const BottomSheetView());
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8, top: 10),
+                    child: Image.asset(
+                      'assets/translation.png',
+                      height: 30,
+                      width: 30,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    navigationPush(context, UserDetailsView());
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10, top: 10),
+                    child: Image.asset(
+                      'assets/user.png',
+                      height: 27,
+                      width: 27,
+                    ),
+                  ),
+                ),
               ],
             ),
             Container(
@@ -254,7 +264,7 @@ class HomeView extends GetView<HomeController> with UtilityMixin {
             itemBuilder: (context, index) {
               final categories = totalCategory[index];
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   navigationPush(context, CategoryView());
                 },
                 child: Column(
@@ -266,11 +276,11 @@ class HomeView extends GetView<HomeController> with UtilityMixin {
                         backgroundImage: AssetImage(categories.categoryImage),
                       ),
                     ),
-                    const SizedBox(height: 5),
+                    const SizedBox(height: 3),
                     Text(categories.categoryName,
                         style: GoogleFonts.inter(
                             color: AppColors.blackColor,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w500,
                             fontSize: 13)),
                   ],
                 ),
@@ -292,7 +302,7 @@ class HomeView extends GetView<HomeController> with UtilityMixin {
           itemBuilder: (context, index) {
             final transports = totalTransports[index];
             return GestureDetector(
-              onTap: (){
+              onTap: () {
                 navigationPush(context, TransportsDetailsView());
               },
               child: Container(
@@ -363,7 +373,8 @@ class HomeView extends GetView<HomeController> with UtilityMixin {
                                       margin: const EdgeInsets.only(top: 10),
                                       decoration: BoxDecoration(
                                           color: const Color(0xFF2B7D0F),
-                                          borderRadius: BorderRadius.circular(5)),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
