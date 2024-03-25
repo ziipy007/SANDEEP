@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:zippy_user/app/mixins/utility_mixins.dart';
 import 'package:zippy_user/app/modules/login/local_widgets/login_button.dart';
 import 'package:zippy_user/app/utils/validators/app_validations.dart';
-
 import '../../../themes/app_colors.dart';
 import '../controllers/login_controller.dart';
 import '../local_widgets/login_top_view.dart';
@@ -23,6 +22,7 @@ class LoginView extends GetView<LoginController> with UtilityMixin {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: AppColors.whiteColor,
+        toolbarHeight: 45,
         actions: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -50,7 +50,7 @@ class LoginView extends GetView<LoginController> with UtilityMixin {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(width: 40),
+                  const SizedBox(width: 30),
                   Container(
                     height: 40,
                     width: 45,
@@ -65,53 +65,51 @@ class LoginView extends GetView<LoginController> with UtilityMixin {
                   ),
                   const SizedBox(width: 15),
                   Expanded(
-                      child: Container(
-                    height: 40,
-                    alignment: Alignment.center,
-                    // padding: const EdgeInsets.all(5),
-                    // margin: const EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      color: AppColors.blackColor.withOpacity(0.15),
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(
-                          color: AppColors.blackColor.withOpacity(0.18)),
-                    ),
-                    child: TextFormField(
-                      maxLength: 10,
-                      autofocus: false,
-                      controller: mobileController,
-                      keyboardType: TextInputType.number,
-                      validator: AppValidator.validateMobile,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        border: InputBorder.none,
-                        counterText: '',
-                        hintText: 'Enter Your Phone number',
-                        hintStyle: GoogleFonts.inter(
-                            color: AppColors.blackColor.withOpacity(0.4),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                        isDense: true,
-                        contentPadding: EdgeInsets.zero,
-                        prefixIconConstraints: BoxConstraints(),
-                        prefixIcon: Text(
-                          '+91 ',
-                          style: GoogleFonts.inter(
-                              color: AppColors.blackColor,
+                    child: Container(
+                      height: 40,
+                      alignment: Alignment.center,
+                      // padding: const EdgeInsets.all(5),
+                      // margin: const EdgeInsets.symmetric(vertical: 20),
+                      decoration: BoxDecoration(
+                        color: AppColors.blackColor.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                            color: AppColors.blackColor.withOpacity(0.18)),
+                      ),
+                      child: TextFormField(
+                        maxLength: 10,
+                        autofocus: false,
+                        controller: mobileController,
+                        keyboardType: TextInputType.number,
+                        validator: AppValidator.validateMobile,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        decoration: InputDecoration(
+                          alignLabelWithHint: true,
+                          border: InputBorder.none,
+                          counterText: '',
+                          hintText: 'Enter Your Phone number',
+                          hintStyle: GoogleFonts.inter(
+                              color: AppColors.blackColor.withOpacity(0.4),
                               fontSize: 14,
                               fontWeight: FontWeight.w400),
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
+                          prefixIconConstraints: const BoxConstraints(),
+                          prefixIcon: Text(
+                            '+91 ',
+                            style: GoogleFonts.inter(
+                                color: AppColors.blackColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400),
+                          ),
                         ),
                       ),
-                      style: GoogleFonts.inter(
-                          color: AppColors.blackColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
-                    ).paddingSymmetric(horizontal: 5),
-                  )),
-                  const SizedBox(width: 40),
+                    ),
+                  ),
+                  const SizedBox(width: 30),
+
                 ],
               ),
               const SizedBox(width: 10),

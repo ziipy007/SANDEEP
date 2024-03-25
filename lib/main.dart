@@ -1,9 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import 'app/routes/app_pages.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';

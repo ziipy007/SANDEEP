@@ -2,17 +2,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:zippy_user/app/modules/user/orders/controllers/orders_controllers.dart';
+import 'package:zippy_user/app/modules/orders/controllers/orders_controllers.dart';
 import 'package:get/get.dart';
-import 'package:zippy_user/app/modules/user/orders/model/order_model.dart';
+import 'package:zippy_user/app/modules/orders/model/order_model.dart';
 
-import '../../../../mixins/utility_mixins.dart';
-import '../../../../themes/app_colors.dart';
+import '../../../mixins/utility_mixins.dart';
+import '../../../themes/app_colors.dart';
 
 class OrdersView extends GetView<OrdersController> with UtilityMixin {
   OrdersView({super.key});
 
   List<OrdersList> ordersLists = getOrderList();
+
+  final OrdersController _tabController = Get.put(OrdersController());
 
   static List<OrdersList> getOrderList() {
     const data = [
@@ -80,48 +82,59 @@ class OrdersView extends GetView<OrdersController> with UtilityMixin {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        toolbarHeight: 60,
+        backgroundColor: AppColors.whiteColor,
         surfaceTintColor: AppColors.whiteColor,
-        flexibleSpace: Container(
-          height: 100,
-          padding: const EdgeInsets.fromLTRB(18, 25, 10, 0),
-          decoration: BoxDecoration(color: AppColors.whiteColor, boxShadow: [
-            BoxShadow(
-                offset: const Offset(0, 3),
-                blurRadius: 5,
-                color: AppColors.blackColor.withOpacity(0.2)),
-          ]),
-          child: Row(
-            children: [
-              GestureDetector(
-                onTap: (){
-                  Navigator.of(context);
-                },
-                child: Icon(Icons.arrow_back_ios,
-                    color: const Color(0xFFE41515).withOpacity(0.65)),
-              ),
-              const SizedBox(width: 12),
-              Text(
-                'My Orders',
-                style: GoogleFonts.poppins(
-                    color: const Color(0xFFE41515).withOpacity(0.65),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15),
-              )
-            ],
-          ),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Icon(Icons.arrow_back_ios,
+                color: const Color(0xFFE41515).withOpacity(0.65))),
+        title: Text(
+          'My Orders',
+          style: GoogleFonts.poppins(
+              color: const Color(0xFFE41515).withOpacity(0.65),
+              fontWeight: FontWeight.w500,
+              fontSize: 15),
         ),
+        centerTitle: false,
       ),
-      body: Expanded(child: orders_list(ordersLists)),
+      body: Column(
+        children: [
+          TabBar(
+            controller: _tabController.controller,
+            tabs: _tabController.myTabs,
+            indicatorColor: AppColors.primaryColor,
+            automaticIndicatorColorAdjustment: true,
+            overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+            labelStyle: GoogleFonts.poppins(
+                color: AppColors.blackColor,
+                fontWeight: FontWeight.w600,
+                fontSize: 13),
+            unselectedLabelStyle: GoogleFonts.poppins(
+                color: AppColors.blackColor,
+                fontWeight: FontWeight.w400,
+                fontSize: 13),
+          ),
+          Expanded(
+            child: TabBarView(controller: _tabController.controller, children: [
+              orders_list(ordersLists),
+              const Center(child: Text('No Orders')),
+            ]),
+          )
+        ],
+      ),
     );
   }
 
-  Widget orders_list(List<OrdersList> totalOrders) =>
-      NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (overscroll) {
+  Widget orders_list(List<OrdersList> totalOrders) => NotificationListener<
+          OverscrollIndicatorNotification>(
+      onNotification: (overscroll) {
         overscroll.disallowIndicator();
         return true;
-      }, child: ListView.builder(
+      },
+      child: ListView.builder(
         itemCount: totalOrders.length,
         itemBuilder: (context, index) {
           final orders = totalOrders[index];

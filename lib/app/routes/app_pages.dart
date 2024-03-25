@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:zippy_user/app/modules/orders/bindings/orders_bindings.dart';
+import 'package:zippy_user/app/modules/orders/views/orders_view.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
