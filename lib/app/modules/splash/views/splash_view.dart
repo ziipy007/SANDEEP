@@ -15,6 +15,7 @@ class SplashView extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.checkLogin();
     return Scaffold(
       body: Container(
         width: double.maxFinite,
