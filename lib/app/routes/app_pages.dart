@@ -10,8 +10,6 @@ import '../modules/otp_verification/bindings/otp_verification_binding.dart';
 import '../modules/otp_verification/views/otp_verification_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
-import '../modules/user/orders/bindings/orders_bindings.dart';
-import '../modules/user/orders/views/orders_view.dart';
 
 part 'app_routes.dart';
 
